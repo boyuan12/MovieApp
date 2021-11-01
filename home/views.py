@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 import requests
 from django.http import HttpResponse
@@ -17,7 +18,9 @@ def search(request):
     if query:
 
         # Get the results from the API
-        data = requests.get(f"https://api.themoviedb.org/3/search/tv?api_key={TMDB_API_KEY}&language=en-US&page=1&include_adult=false&query={query}")
+
+        data = requests.get(f"https://api.themoviedb.org/3/search/{request.GET.get('type')}?api_key={TMDB_API_KEY}&language=en-US&page=1&include_adult=false&query={query}")
+        print(data.json())
 
         # temp = []
         # for m in data.json()["results"]:
@@ -36,8 +39,15 @@ def search(request):
 
     # Render the template
     return render(request, 'home/results.html', {
-        "data": data.json()
+        "data": data.json(),
+        "type": request.GET.get("type")
     })
 
 def index(request):
     return render(request, 'home/index.html')
+
+def view_tv_detail(request, tv_id):
+    data = requests.get(f"https://api.themoviedb.org/3/tv/{tv_id}?api_key={TMDB_API_KEY}&language=en-US")
+    return render(request, "home/tv_detail.html", {
+        "data": data.json()
+    })
