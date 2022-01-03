@@ -1,0 +1,29 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block main %}
+    <h1>{{ data.title }}</h1>
+    <h4 style="color: gray;"><i>~{{ data.tagline }}</i></h4>
+    <img src="https://image.tmdb.org/t/p/w200{{ data.poster_path }}" alt="...">
+    <hr>
+    <h2>Overview</h2>
+    <p>{{ data.overview }}</p>
+    <hr>
+    <h2>Genres</h2>
+    <ul>
+        {% for g in data.genres %}
+            <li>{{ g.name }}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2>General Information:</h2>
+    <p>
+        <strong>Release date:</strong> {{ data.release_date }} <br>
+        {% load numbers %}
+        <strong>Revenue:</strong> ${{ data.revenue|format_number }} <br>
+        <strong>Runtime: </strong> {{ data.runtime }} minutes <br>
+    </p>
+{% endblock %}

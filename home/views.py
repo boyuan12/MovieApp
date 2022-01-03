@@ -51,3 +51,9 @@ def view_tv_detail(request, tv_id):
     return render(request, "home/tv_detail.html", {
         "data": data.json()
     })
+
+def view_movie_detail(request, movie_id):
+    data = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US")
+    return render(request, "home/movie_detail.html", {
+        "data": data.json()
+    })

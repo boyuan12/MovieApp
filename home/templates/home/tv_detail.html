@@ -6,11 +6,34 @@
 
 {% block main %}
     <h1>{{ data.name }}</h1>
+    <h4 style="color: gray;"><i>~{{ data.tagline }}</i></h4>
     <img src="https://image.tmdb.org/t/p/w200{{ data.poster_path }}" alt="...">
+    <hr>
     <h2>Networks</h2>
     {% for n in data.networks %}
         <h3>{{ n.name }}</h3>
         <img src="https://image.tmdb.org/t/p/w200/{{ n.logo_path }}" alt="...">
     {% endfor %}
-
+    <hr>
+    <h2>Genres</h2>
+    <ul>
+        {% for g in data.genres %}
+            <li>{{ g.name }}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2>Languages</h2>
+    <ul>
+        {% for l in data.languages %}
+            <li>{{ l }}</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2>Last episode as of today</h2>
+    <p>
+        <strong>Air date:</strong> {{ data.last_episode_to_air.air_date }} <br>
+        <strong>Episode number:</strong> {{ data.last_episode_to_air.episode_number }} <br>
+        <strong>Name: </strong> {{ data.last_episode_to_air.name }} <br>
+        <strong>Overview: </strong> {{ data.last_episode_to_air.overview }} <br>
+    </p>
 {% endblock %}
