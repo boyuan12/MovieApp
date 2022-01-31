@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+    Comments
+{% endblock %}
+
+{% block main %}
+    <h1>Comment page for {{ title }} </h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% for c in comments %}
+        {{ c }}
+    {% endfor %}
+{% endblock %}
