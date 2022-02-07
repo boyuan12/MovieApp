@@ -16,6 +16,9 @@
     </form>
 
     {% for c in comments %}
-        {{ c }}
+        <div>
+            {{ c.user }} on {{ c.created_at }} said: <br> {{ c.comment }}
+        </div>
+        <br>
     {% endfor %}
 {% endblock %}

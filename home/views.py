@@ -76,7 +76,7 @@ def comment_page(request, movie_id):
         data = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US")
         title = data.json()["title"]
 
-        comments = Comment.objects.filter(movie_id=movie_id)
+        comments = reversed(Comment.objects.filter(movie_id=movie_id))
 
         return render(request, "home/comments.html", {
             "title": title,
